@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate templates
+        run: npm run validate
+      - name: Smoke test generator
+        run: |
+          smoke="$RUNNER_TEMP/collaboration-kit-smoke"
+          node scripts/use-template.mjs "$smoke" \
+            --set PROJECT_NAME=Smoke Project \
+            --set DEFAULT_BRANCH=main \
+            --set CHANGE_BRANCH_PREFIX=tasks/ \
+            --set RELATED_TEST_GATE=true \
+            --set TYPECHECK_GATE=true \
+            --set FORMAT_GATE=true \
+            --set SIGNOFF_MECHANISM="DCO Signed-off-by"
+          test -f "$smoke/AGENTS.md"
+          test -f "$smoke/.github/PULL_REQUEST_TEMPLATE.md"
+          rm -rf "$smoke"
