@@ -29,7 +29,7 @@ From this repository:
 Generate the kit into a new or existing repository:
 
     node scripts/use-template.mjs /path/to/target-repo \
-      --set PROJECT_NAME=My Project \
+      --set "PROJECT_NAME=My Project" \
       --set DEFAULT_BRANCH=main \
       --set CHANGE_BRANCH_PREFIX=tasks/ \
       --set RELATED_TEST_GATE=npm test \

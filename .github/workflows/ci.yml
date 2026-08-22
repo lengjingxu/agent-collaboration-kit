@@ -23,7 +23,7 @@ jobs:
         run: |
           smoke="$RUNNER_TEMP/collaboration-kit-smoke"
           node scripts/use-template.mjs "$smoke" \
-            --set PROJECT_NAME=Smoke Project \
+            --set "PROJECT_NAME=Smoke Project" \
             --set DEFAULT_BRANCH=main \
             --set CHANGE_BRANCH_PREFIX=tasks/ \
             --set RELATED_TEST_GATE=true \
