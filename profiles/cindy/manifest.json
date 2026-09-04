@@ -1,0 +1,83 @@
+{
+  "name": "cindy-reusable-rules",
+  "version": "1.0.0",
+  "source": {
+    "repository": "https://github.com/makecindy/cindy",
+    "ref": "main",
+    "commit": "50a6e913b43c5d86b5f0d2ee1c2da06f27238a57",
+    "license": "Apache-2.0"
+  },
+  "destination": "profiles/cindy",
+  "included": [
+    {
+      "source": "AGENTS.md",
+      "target": "AGENTS.md",
+      "category": "agent-entry"
+    },
+    {
+      "source": "REVIEW.md",
+      "target": "REVIEW.md",
+      "category": "review"
+    },
+    {
+      "source": ".github/PULL_REQUEST_TEMPLATE.md",
+      "target": ".github/PULL_REQUEST_TEMPLATE.md",
+      "category": "pull-request"
+    },
+    {
+      "source": "DCO",
+      "target": "DCO",
+      "category": "contribution"
+    },
+    {
+      "source": "CONTRIBUTING.md",
+      "target": "CONTRIBUTING.md",
+      "category": "contribution"
+    },
+    {
+      "source": "docs/README.md",
+      "target": "docs/README.md",
+      "category": "documentation-index"
+    },
+    {
+      "source": "docs/dev-rules/**",
+      "target": "docs/dev-rules/**",
+      "category": "engineering"
+    },
+    {
+      "source": "docs/design-rules/**",
+      "target": "docs/design-rules/**",
+      "category": "design"
+    }
+  ],
+  "excluded": [
+    {
+      "source": "docs/product-rules/**",
+      "reason": "Product behavior and feature decisions are project-specific."
+    },
+    {
+      "source": "docs/design-previews/**",
+      "reason": "One-off visual QA artifacts and bug reproductions."
+    },
+    {
+      "source": "docs/design-rules/gamepad*",
+      "reason": "Hardware-specific settings UI authoring and assets."
+    },
+    {
+      "source": "docs/design-rules/gamepads/**",
+      "reason": "Hardware-specific controller artwork and hit areas."
+    },
+    {
+      "source": "docs/*-plan.md",
+      "reason": "Feature or integration implementation plans are project-specific."
+    },
+    {
+      "source": "docs/*-requirements.md",
+      "reason": "Product or feature requirements are project-specific."
+    },
+    {
+      "source": "docs/legal/notices/**",
+      "reason": "Generated dependency notices and SBOM files are source-project artifacts."
+    }
+  ]
+}

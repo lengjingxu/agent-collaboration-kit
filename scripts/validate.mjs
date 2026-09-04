@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const templateDir = path.join(root, "templates");
+const cindyProfileDir = path.join(root, "profiles", "cindy");
 const errors = [];
 
 function readJson(relativePath) {
@@ -85,6 +86,55 @@ try {
 			errors.push("Template is product-specific: " + path.relative(root, file.filePath));
 		}
 	}
+
+	const profileManifest = readJson("profiles/cindy/manifest.json");
+	assert.equal(profileManifest.name, "cindy-reusable-rules");
+	assert.equal(profileManifest.source.repository, "https://github.com/makecindy/cindy");
+	assert.match(profileManifest.source.commit, /^[0-9a-f]{40}$/);
+	assert.equal(profileManifest.source.license, "Apache-2.0");
+	assert.equal(profileManifest.destination, "profiles/cindy");
+	assert.ok(Array.isArray(profileManifest.included) && profileManifest.included.length > 0);
+	assert.ok(Array.isArray(profileManifest.excluded) && profileManifest.excluded.length > 0);
+
+	for (const item of profileManifest.included) {
+		assert.equal(typeof item.source, "string", "profile source must be a string");
+		assert.equal(typeof item.target, "string", "profile target must be a string");
+		assert.equal(typeof item.category, "string", "profile category must be a string");
+		const target = path.join(root, profileManifest.destination, item.target);
+		const targetIsDirectory = item.target.endsWith("/**");
+		const resolvedTarget = targetIsDirectory ? target.slice(0, -3) : target;
+		if (!isInside(cindyProfileDir, resolvedTarget)) {
+			errors.push("Profile target escapes profile directory: " + item.target);
+			continue;
+		}
+		if (!fs.existsSync(resolvedTarget)) {
+			errors.push("Missing profile target: " + item.target);
+		} else if (targetIsDirectory && !fs.statSync(resolvedTarget).isDirectory()) {
+			errors.push("Profile target must be a directory: " + item.target);
+		}
+	}
+
+	const requiredProfileFiles = [
+		"README.md",
+		"manifest.json",
+		"LICENSE-APACHE-2.0",
+	];
+	for (const relativePath of requiredProfileFiles) {
+		if (!fs.existsSync(path.join(cindyProfileDir, relativePath))) {
+			errors.push("Missing profile metadata: " + relativePath);
+		}
+	}
+
+	const forbiddenProfilePaths = [
+		"docs/product-rules",
+		"docs/design-previews",
+		"docs/legal/notices",
+	];
+	for (const relativePath of forbiddenProfilePaths) {
+		if (fs.existsSync(path.join(cindyProfileDir, relativePath))) {
+			errors.push("Business or generated source was copied into profile: " + relativePath);
+		}
+	}
 } catch (error) {
 	errors.push(error.message);
 }
@@ -95,4 +145,4 @@ if (errors.length > 0) {
 	process.exit(1);
 }
 
-console.log("template manifest valid");
+console.log("template and Cindy profile manifests valid");
