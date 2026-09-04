@@ -18,8 +18,8 @@ reused across agent-assisted software projects.
 - .github/PULL_REQUEST_TEMPLATE.md: scope, verification, risk, and rollback evidence.
 - docs/dev-rules/: engineering, security, storage, architecture, workflow, and
   platform rules.
-- docs/design-rules/: design system, token, interaction, copy, governance, and
-  visual reference rules.
+- docs/design-rules/: the complete design system, token, interaction, copy,
+  governance, visual reference, gamepad authoring, and controller artwork set.
 - DCO and CONTRIBUTING.md: contribution and attribution guidance required by the
   copied entry point.
 
@@ -30,7 +30,6 @@ reused across agent-assisted software projects.
 - Feature requirements, implementation plans, bridge designs, and runtime
   integration plans under docs/.
 - docs/design-previews/: one-off QA demos, screenshots, and bug reproductions.
-- Gamepad authoring rules and controller artwork: hardware-specific settings UI.
 - Generated legal notices, SBOM files, and third-party dependency inventories.
 
 ## Use

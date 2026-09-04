@@ -95,6 +95,19 @@ try {
 	assert.equal(profileManifest.destination, "profiles/cindy");
 	assert.ok(Array.isArray(profileManifest.included) && profileManifest.included.length > 0);
 	assert.ok(Array.isArray(profileManifest.excluded) && profileManifest.excluded.length > 0);
+	assert.ok(
+		profileManifest.included.some(
+			(item) => item.source === "docs/design-rules/**" && item.target === "docs/design-rules/**",
+		),
+		"Cindy design rules must be included as a complete directory",
+	);
+	assert.equal(
+		profileManifest.excluded.filter(
+			(item) => item.source === "docs/design-rules" || item.source.startsWith("docs/design-rules/"),
+		).length,
+		0,
+		"Cindy design rules must not have partial exclusions",
+	);
 
 	for (const item of profileManifest.included) {
 		assert.equal(typeof item.source, "string", "profile source must be a string");

@@ -60,14 +60,6 @@
       "reason": "One-off visual QA artifacts and bug reproductions."
     },
     {
-      "source": "docs/design-rules/gamepad*",
-      "reason": "Hardware-specific settings UI authoring and assets."
-    },
-    {
-      "source": "docs/design-rules/gamepads/**",
-      "reason": "Hardware-specific controller artwork and hit areas."
-    },
-    {
       "source": "docs/*-plan.md",
       "reason": "Feature or integration implementation plans are project-specific."
     },
