@@ -6,8 +6,9 @@ All notable changes are documented here.
 
 ### Added
 
-- Cindy-derived profile containing reusable engineering and design documents from
-  the pinned public Cindy main commit.
+- Cindy-derived profile containing the complete reusable engineering and design
+  rules from the pinned public Cindy main commit, including gamepad authoring
+  guidance and controller artwork.
 
 ## 0.1.0 - 2026-08-22
 
