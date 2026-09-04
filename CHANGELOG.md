@@ -2,6 +2,13 @@
 
 All notable changes are documented here.
 
+## Unreleased
+
+### Added
+
+- Cindy-derived profile containing reusable engineering and design documents from
+  the pinned public Cindy main commit.
+
 ## 0.1.0 - 2026-08-22
 
 ### Added

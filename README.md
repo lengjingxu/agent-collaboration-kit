@@ -16,9 +16,15 @@ UI and copy constraints, and automation gates.
 | templates/UI_UX_RULES.template.md | Optional interface, interaction, motion, and copy rules. |
 | templates/SETUP_CHECKLIST.md | One-time adoption checklist. |
 | templates/manifest.json | Machine-readable sources, destinations, and placeholders. |
+| profiles/cindy/ | Cindy-derived engineering and design rules, copied from a pinned public commit. |
 
 The templates are intentionally product-neutral. They do not assume a language, framework,
 CI vendor, hosting platform, or team size.
+
+The Cindy profile is kept separate from the templates. It includes the actual
+engineering and design documents from Cindy, while leaving product rules,
+feature plans, and one-off QA artifacts out of the reusable package. See
+profiles/cindy/README.md for the source commit, license, and boundary.
 
 ## Quick Start
 
@@ -51,9 +57,9 @@ Run local checks:
 
     npm run validate
 
-CI validates the manifest, verifies every required source exists, rejects unsafe target
-paths, confirms placeholders are documented and discoverable, and checks that templates stay
-product-neutral.
+CI validates the generic manifest and the Cindy profile manifest, verifies every required
+source exists, rejects unsafe target paths, confirms placeholders are documented and
+discoverable, and checks that templates stay product-neutral.
 
 ## License
 
